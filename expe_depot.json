@@ -1,0 +1,191 @@
+{
+    "sheets": [
+        {
+            "name": "expo_newSheet",
+            "description": "expensu",
+            "displayColumn": "id",
+            "guid": "82ca0df7-dfb8-4818-8ac5-9bcf1196ebf7",
+            "columns": [
+                {
+                    "typeStr": "int",
+                    "guid": "31a223c9-e603-47b4-ac4e-c4d4a4ba97f8",
+                    "description": "int field",
+                    "name": "amount",
+                    "min": 0,
+                    "max": 100000,
+                    "defaultValue": 0,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "d9501448-3427-4dad-8d0b-04a26a252ec6",
+                    "name": "comments",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "f26bb000-d924-4bba-b46f-f1bb4fab3783",
+                    "name": "date",
+                    "description": "text field",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "edfe6d7a-33d9-4eb1-8f78-c4562a44763c",
+                    "id": "0a",
+                    "amount": 500,
+                    "comments": "poi",
+                    "date": "22-02-2020"
+                },
+                {
+                    "guid": "bef5a71f-f661-4d10-9969-fef90d0e29a2",
+                    "id": "1b",
+                    "amount": 60,
+                    "comments": "okk",
+                    "date": "22-02-2020"
+                },
+                {
+                    "guid": "cf4d9d11-4a18-44ec-a3eb-92a1a92dc253",
+                    "id": "2c",
+                    "amount": 85,
+                    "comments": "ummm",
+                    "date": "22-02-2020"
+                },
+                {
+                    "guid": "1c3c6eff-8bf7-4fb3-96e1-4a2fa06bcfd7",
+                    "id": "3d",
+                    "amount": 897,
+                    "comments": "waste",
+                    "date": "22-02-2020"
+                },
+                {
+                    "guid": "7b3077ce-e9d9-4164-b92b-8ab81b66d890",
+                    "id": "4e",
+                    "amount": 7875,
+                    "comments": "use",
+                    "date": "22-02-2020"
+                },
+                {
+                    "guid": "8ea39530-7864-4f0c-b642-c73436706eed",
+                    "id": "5f",
+                    "amount": 8733,
+                    "comments": "nagalqwr",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "4e1237e0-5c22-44c9-a1ae-8b1310e54707",
+                    "id": "6ty",
+                    "amount": 250,
+                    "comments": "nepalqwr",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "3639bc21-ce03-407b-b56a-7df480e0a290",
+                    "id": "6ty_copy_0",
+                    "amount": 250,
+                    "comments": "nepalwqr",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "17c03f6b-0022-4ed0-b548-ae33809db86b",
+                    "id": "6ty_copy_0_copy_1",
+                    "amount": 250,
+                    "comments": "nepalrwqr",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "f23f32ec-373c-4f2e-b262-7e3983a641ef",
+                    "id": "6ty_copy_0_copy_2",
+                    "amount": 250,
+                    "comments": "nepalrwqw",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "9d9ca017-241d-40a0-8dda-16f605ee0f7f",
+                    "id": "6ty_copy_0_copy_3",
+                    "amount": 250,
+                    "comments": "nepalafe",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "8ef14f2f-a989-4259-b955-c07e79d62b6c",
+                    "id": "6ty_copy_0_copy_4",
+                    "amount": 250,
+                    "comments": "nepalwef",
+                    "date": "23-02-2020"
+                },
+                {
+                    "guid": "99339bc1-ae7b-4c69-b3ef-331fc5826c10",
+                    "id": "6ty_copy_0_copy_5",
+                    "amount": 250,
+                    "comments": "nepalwaw",
+                    "date": "24-02-2020"
+                },
+                {
+                    "guid": "cb210bae-bf3d-4b00-b0d5-6a4b8c3cad36",
+                    "id": "6ty_copy_0_copy_6",
+                    "amount": 250,
+                    "comments": "nepalfew",
+                    "date": "24-02-2020"
+                },
+                {
+                    "guid": "bd96fee5-a636-4b60-a702-f367ab1119b0",
+                    "id": "6ty_copy_0_copy_7",
+                    "amount": 250,
+                    "comments": "nepalssd",
+                    "date": "24-02-2020"
+                },
+                {
+                    "guid": "965ff3bd-78c9-4d81-b974-e5c5703f0717",
+                    "id": "6ty_copy_0_copy_8",
+                    "amount": 250,
+                    "comments": "nepala",
+                    "date": "20-02-2020"
+                },
+                {
+                    "guid": "4b7c6617-ec37-464e-8ae6-df4c65e91554",
+                    "id": "6ty_copy_0_copy_9",
+                    "amount": 250,
+                    "comments": "nepala",
+                    "date": "24-02-2020"
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}

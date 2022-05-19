@@ -1,0 +1,287 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css"
+    />
+    <style>
+      td.highlight {
+        font-weight: bold;
+        color: blue;
+      }
+      .group {
+        background-color: red !important;
+      }
+    </style>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css"
+    /> -->
+  </head>
+  <body>
+    <div>
+      <table id="example" class="table table-striped" style="width: 100%">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Extn.</th>
+            <th>Start date</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Extn.</th>
+            <th>Start date</th>
+            <th>Salary</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.5.1.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"
+    ></script>
+  </body>
+</html>
+<script>
+  $.getJSON("expe_depot.json", function (json) {
+    console.log(json.sheets[0].lines);
+    var groupColumn = 0;
+    var table = $("#example").DataTable({
+      scrollY: "500px",
+      scrollX: true,
+      scrollCollapse: true,
+      data: json.sheets[0].lines,
+      columns: [
+        { data: "date" },
+        { data: "comments" },
+        { data: "comments" },
+        { data: "id" },
+        { data: "comments" },
+        { data: "id" },
+      ],
+      //ajax: "data/objects_deep.txt",
+      columnDefs: [{ visible: false, targets: groupColumn }],
+      order: [[groupColumn, "asc"]],
+      displayLength: 25,
+      drawCallback: function (settings) {
+        var api = this.api();
+        var rows = api.rows({ page: "current" }).nodes();
+        var last = null;
+
+        api
+          .column(groupColumn, { page: "current" })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                .eq(i)
+                .before(
+                  '<tr class="group"><td colspan="5">' + group + "</td></tr>"
+                );
+
+              last = group;
+            }
+          });
+      },
+    });
+    $("#example tbody").on("click", "tr.group", function () {
+      var currentOrder = table.order()[0];
+      if (currentOrder[0] === groupColumn && currentOrder[1] === "asc") {
+        table.order([groupColumn, "desc"]).draw();
+      } else {
+        table.order([groupColumn, "asc"]).draw();
+      }
+    });
+    $("#example").DataTable({
+      createdRow: function (row, data, index) {
+        //if (data[5].replace(/[\$,]/g, "") * 1 > 150000) {
+        $("td", row).eq(5).addClass("highlight");
+        //}
+      },
+    });
+    $("#example").DataTable({
+      footerCallback: function (row, data, start, end, display) {
+        var api = this.api();
+
+        // Remove the formatting to get integer data for summation
+        var intVal = function (i) {
+          return typeof i === "string"
+            ? i.replace(/[\$,]/g, "") * 1
+            : typeof i === "number"
+            ? i
+            : 0;
+        };
+
+        // Total over all pages
+        total = api
+          .column(4)
+          .data()
+          .reduce(function (a, b) {
+            return intVal(a) + intVal(b);
+          }, 0);
+
+        // Total over this page
+        pageTotal = api
+          .column(4, { page: "current" })
+          .data()
+          .reduce(function (a, b) {
+            return intVal(a) + intVal(b);
+          }, 0);
+
+        // Update footer
+        $(api.column(4).footer()).html(
+          "$" + pageTotal + " ( $" + total + " total)"
+        );
+      },
+    });
+  });
+</script>
+
+<!-- <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dictionary</title>
+  </head>
+  <body>
+    <h1>Daily Expenses</h1>
+    <h6>17th May 2022</h6>
+    <table id="example" class="display" style="width: 100%">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Extn.</th>
+          <th>Start date</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Extn.</th>
+          <th>Start date</th>
+          <th>Salary</th>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>
+<script>
+  $.getJSON("expe_depot.json", function (json) {
+    console.log(json.sheets[0].lines);
+    $("#example").DataTable({
+      columns: [
+        { data: "json.sheets[0].lines.amount" },
+        { data: json.sheets[0].lines.amount },
+        { data: "date" },
+        { data: "comments" },
+        { data: "comments" },
+        { data: "id" },
+      ],
+    });
+  });
+  // $(document).ready(function () {
+  //   $("#example").DataTable({
+  //     processing: true,
+  //     ajax: "expe_depot.json",
+  //     columns: [
+  //       { data: "amount" },
+  //       { data: "amount" },
+  //       { data: "date" },
+  //       { data: "comments" },
+  //       { data: "comments" },
+  //       { data: "id" },
+  //     ],
+  //   });
+  // });
+  // var jsons = $.getJSON("data.json");
+  // var datas = jsons;
+  // var jso = [];
+  // var $table = $("#example");
+  // $.getJSON("data.json", function (json) {
+  //   //$table.bootstrapTable({ data: JSON.parse(datas.responseJSON.data) });
+  //   //console.log(datas.responseJSON.data);
+  //   //jso.push(json); // this will show the info it in firebug console
+  // });
+
+  // $.getJSON("expe_depot.json", function (json) {
+  //   //console.log(json.sheets[0].lines);
+  //   //$table.bootstrapTable({ data: json.sheets[0].lines });
+  // });
+
+  // //console.log(jso);
+  // var data = [
+  //   {
+  //     id: 0,
+  //     name: "Item 0",
+  //     price: "$0",
+  //   },
+  // ];
+  // var psons = $.getJSON("expe_depot.json");
+  // //console.log(psons.responseJSON);
+  // let requestt = new Request("./expe_depot.json");
+  // console.log(requestt);
+  // fetch(requestt)
+  //   .then(function (res) {
+  //     return res.json();
+  //   })
+  //   .then(function (data) {
+  //     console.log(data.sheets[0].lines);
+  //     //$("#example").bootstrapTable({ data: data.sheets[0].lines[0] });
+  //     $("#example").bootstrapTable({
+  //       ajax: "./expe_depot.json",
+  //       columns: [
+  //         { data: "sheets[0].lines[0].amount" },
+  //         { data: "hr.position" },
+  //         { data: "contact.0" },
+  //         { data: "contact.1" },
+  //         { data: "hr.start_date" },
+  //         { data: "hr.salary" },
+  //       ],
+  //     });
+  //   });
+
+  //var $table = $("#example");
+  //$table.bootstrapTable({ data: data });
+  //
+  // $(document).ready(function () {
+  //   $("#example").Boostrable({
+  //     ajax: "data.json",
+  //     columns: [
+  //       { data: "ClubTrackingNo" },
+  //       { data: "ClubModeOfPayment" },
+  //       { data: "ShippingAddress" },
+  //     ],
+  //   });
+  //   $table.bootstrapTable({ data: jsons });
+  // });
+</script> -->

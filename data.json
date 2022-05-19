@@ -1,0 +1,28 @@
+{
+  "data": [
+      {
+          "date": "22-2-2022",
+          "transaction": "expense",
+          "category": "sha",
+          "modeOfpayment": "HDFC",
+          "amount": "5000",
+          "comments": "sha education"
+      } ,
+      {
+        "date": "22-2-2022",
+        "transaction": "expense",
+        "category": "sha",
+        "modeOfpayment": "HDFC",
+        "amount": "5000",
+        "comments": "sha education"
+    },
+    {
+      "date": "22-2-2022",
+      "transaction": "expense",
+      "category": "sha",
+      "modeOfpayment": "HDFC",
+      "amount": "5000",
+      "comments": "sha education"
+    }
+  ]
+}
