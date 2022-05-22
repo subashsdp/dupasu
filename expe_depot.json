@@ -1,19 +1,105 @@
 {
     "sheets": [
         {
-            "name": "expo_newSheet",
-            "description": "expensu",
+            "name": "expo_2022",
+            "description": "expense json of 2022 (Jun to Dec)",
             "displayColumn": "id",
-            "guid": "82ca0df7-dfb8-4818-8ac5-9bcf1196ebf7",
+            "guid": "f1c6ccc8-6af6-42dc-938b-e4a2182dcbd8",
             "columns": [
                 {
-                    "typeStr": "int",
-                    "guid": "31a223c9-e603-47b4-ac4e-c4d4a4ba97f8",
-                    "description": "int field",
+                    "typeStr": "text",
+                    "guid": "0872d5aa-2e3e-4b64-ad27-90d298123ad1",
+                    "name": "date",
+                    "description": "date",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "enum",
+                    "guid": "c52eaf31-fce7-4e74-85b3-ba1ab304cfde",
+                    "name": "modeOfTransaction",
+                    "description": "common name of transaction",
+                    "options": "Expense, Income, Loan, Loan Back, Savings, Transfer",
+                    "defaultValue": "Expense",
+                    "iconName": "newEnum",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text",
+                        "options": "text"
+                    }
+                },
+                {
+                    "typeStr": "enum",
+                    "guid": "85004687-60cb-4bb7-aad9-76fd01a5f785",
+                    "name": "wayOfTransaction",
+                    "description": "new enum field",
+                    "options": "Cash, HDFC, IDFC, KVB, SBI",
+                    "defaultValue": "IDFC",
+                    "iconName": "newEnum",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text",
+                        "options": "text"
+                    }
+                },
+                {
+                    "typeStr": "float",
+                    "guid": "bcb771e9-265b-4693-ad6e-19d4ac3a3c58",
+                    "description": "amount in INR",
                     "name": "amount",
-                    "min": 0,
+                    "min": -100000,
                     "max": 100000,
                     "defaultValue": 0,
+                    "iconName": "newFloat",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "float",
+                        "max": "float",
+                        "defaultValue": "float"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "b32ff0af-1d0f-421b-b1ae-99eeb0673f1a",
+                    "name": "comments",
+                    "description": "few line about particular transactions",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "e19dcf95-e3b6-4f97-ab37-c2f3b283b7f2",
+                    "name": "month",
+                    "description": "respective month",
+                    "defaultValue": "May",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "99772c98-530d-4e09-854c-ad92a6a29dab",
+                    "description": "respective month in no",
+                    "name": "monthInNo",
+                    "min": 1,
+                    "max": 12,
+                    "defaultValue": 6,
                     "iconName": "newInt",
                     "configurable": {
                         "name": "text",
@@ -24,151 +110,107 @@
                     }
                 },
                 {
-                    "typeStr": "text",
-                    "guid": "d9501448-3427-4dad-8d0b-04a26a252ec6",
-                    "name": "comments",
-                    "description": "text field",
-                    "defaultValue": "",
-                    "iconName": "newText",
+                    "typeStr": "int",
+                    "guid": "3a43dbb4-5b72-4f58-995b-e36fed1ff957",
+                    "description": "respective year",
+                    "name": "year",
+                    "min": 2022,
+                    "max": 2050,
+                    "defaultValue": 2022,
+                    "iconName": "newInt",
                     "configurable": {
                         "name": "text",
                         "description": "text",
-                        "defaultValue": "text"
-                    }
-                },
-                {
-                    "typeStr": "text",
-                    "guid": "f26bb000-d924-4bba-b46f-f1bb4fab3783",
-                    "name": "date",
-                    "description": "text field",
-                    "defaultValue": "",
-                    "iconName": "newText",
-                    "configurable": {
-                        "name": "text",
-                        "description": "text",
-                        "defaultValue": "text"
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
                     }
                 }
             ],
             "lines": [
                 {
-                    "guid": "edfe6d7a-33d9-4eb1-8f78-c4562a44763c",
-                    "id": "0a",
-                    "amount": 500,
-                    "comments": "poi",
-                    "date": "22-02-2020"
+                    "guid": "38adc61a-7dbd-45b1-a9eb-8a4698c4e1ce",
+                    "id": "1",
+                    "date": "22-06-2022",
+                    "modeOfTransaction": "Income",
+                    "wayOfTransaction": "IDFC",
+                    "amount": 10000,
+                    "comments": "test",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 },
                 {
-                    "guid": "bef5a71f-f661-4d10-9969-fef90d0e29a2",
-                    "id": "1b",
-                    "amount": 60,
-                    "comments": "okk",
-                    "date": "22-02-2020"
+                    "guid": "10700a64-4193-40fb-9534-c486c79f7968",
+                    "id": "2",
+                    "date": "23-06-2022",
+                    "modeOfTransaction": "Expense",
+                    "wayOfTransaction": "IDFC",
+                    "amount": -10000,
+                    "comments": "test2",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 },
                 {
-                    "guid": "cf4d9d11-4a18-44ec-a3eb-92a1a92dc253",
-                    "id": "2c",
-                    "amount": 85,
-                    "comments": "ummm",
-                    "date": "22-02-2020"
+                    "guid": "a0d3f1a8-410d-465d-9467-19c4870068a0",
+                    "id": "3",
+                    "date": "23-06-2022",
+                    "modeOfTransaction": "Loan",
+                    "wayOfTransaction": "IDFC",
+                    "amount": -10000,
+                    "comments": "test loan",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 },
                 {
-                    "guid": "1c3c6eff-8bf7-4fb3-96e1-4a2fa06bcfd7",
-                    "id": "3d",
-                    "amount": 897,
-                    "comments": "waste",
-                    "date": "22-02-2020"
+                    "guid": "e673435b-ac57-445c-8e61-c4d8ec123334",
+                    "id": "4",
+                    "date": "24-06-2022",
+                    "modeOfTransaction": "Loan Back",
+                    "wayOfTransaction": "IDFC",
+                    "amount": 10000,
+                    "comments": "test back",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 },
                 {
-                    "guid": "7b3077ce-e9d9-4164-b92b-8ab81b66d890",
-                    "id": "4e",
-                    "amount": 7875,
-                    "comments": "use",
-                    "date": "22-02-2020"
+                    "guid": "a48ac5b2-45d1-4698-8799-d48436215d52",
+                    "id": "5",
+                    "date": "25-06-2022",
+                    "modeOfTransaction": "Savings",
+                    "wayOfTransaction": "IDFC",
+                    "amount": -10000,
+                    "comments": "savings send",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 },
                 {
-                    "guid": "8ea39530-7864-4f0c-b642-c73436706eed",
-                    "id": "5f",
-                    "amount": 8733,
-                    "comments": "nagalqwr",
-                    "date": "23-02-2020"
+                    "guid": "8313f7af-52e3-4619-b621-4879beb98ace",
+                    "id": "6",
+                    "date": "25-06-2022",
+                    "modeOfTransaction": "Transfer",
+                    "wayOfTransaction": "HDFC",
+                    "amount": 10000,
+                    "comments": "savings recieve",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 },
                 {
-                    "guid": "4e1237e0-5c22-44c9-a1ae-8b1310e54707",
-                    "id": "6ty",
-                    "amount": 250,
-                    "comments": "nepalqwr",
-                    "date": "23-02-2020"
-                },
-                {
-                    "guid": "3639bc21-ce03-407b-b56a-7df480e0a290",
-                    "id": "6ty_copy_0",
-                    "amount": 250,
-                    "comments": "nepalwqr",
-                    "date": "23-02-2020"
-                },
-                {
-                    "guid": "17c03f6b-0022-4ed0-b548-ae33809db86b",
-                    "id": "6ty_copy_0_copy_1",
-                    "amount": 250,
-                    "comments": "nepalrwqr",
-                    "date": "23-02-2020"
-                },
-                {
-                    "guid": "f23f32ec-373c-4f2e-b262-7e3983a641ef",
-                    "id": "6ty_copy_0_copy_2",
-                    "amount": 250,
-                    "comments": "nepalrwqw",
-                    "date": "23-02-2020"
-                },
-                {
-                    "guid": "9d9ca017-241d-40a0-8dda-16f605ee0f7f",
-                    "id": "6ty_copy_0_copy_3",
-                    "amount": 250,
-                    "comments": "nepalafe",
-                    "date": "23-02-2020"
-                },
-                {
-                    "guid": "8ef14f2f-a989-4259-b955-c07e79d62b6c",
-                    "id": "6ty_copy_0_copy_4",
-                    "amount": 250,
-                    "comments": "nepalwef",
-                    "date": "23-02-2020"
-                },
-                {
-                    "guid": "99339bc1-ae7b-4c69-b3ef-331fc5826c10",
-                    "id": "6ty_copy_0_copy_5",
-                    "amount": 250,
-                    "comments": "nepalwaw",
-                    "date": "24-02-2020"
-                },
-                {
-                    "guid": "cb210bae-bf3d-4b00-b0d5-6a4b8c3cad36",
-                    "id": "6ty_copy_0_copy_6",
-                    "amount": 250,
-                    "comments": "nepalfew",
-                    "date": "24-02-2020"
-                },
-                {
-                    "guid": "bd96fee5-a636-4b60-a702-f367ab1119b0",
-                    "id": "6ty_copy_0_copy_7",
-                    "amount": 250,
-                    "comments": "nepalssd",
-                    "date": "24-02-2020"
-                },
-                {
-                    "guid": "965ff3bd-78c9-4d81-b974-e5c5703f0717",
-                    "id": "6ty_copy_0_copy_8",
-                    "amount": 250,
-                    "comments": "nepala",
-                    "date": "20-02-2020"
-                },
-                {
-                    "guid": "4b7c6617-ec37-464e-8ae6-df4c65e91554",
-                    "id": "6ty_copy_0_copy_9",
-                    "amount": 250,
-                    "comments": "nepala",
-                    "date": "24-02-2020"
+                    "guid": "365e8701-8605-4550-ae2f-0ce9d1b06283",
+                    "id": "6",
+                    "date": "26-06-2022",
+                    "modeOfTransaction": "Income",
+                    "wayOfTransaction": "Cash",
+                    "amount": 1000,
+                    "comments": "textu",
+                    "month": "May",
+                    "monthInNo": 6,
+                    "year": 2022
                 }
             ],
             "hidden": false,

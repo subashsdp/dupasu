@@ -19,7 +19,11 @@
         color: blue;
       }
       .group {
-        background-color: yellow !important;
+        background-color: #f3c89f !important;
+        font-weight: bold;
+      }
+      .low {
+        color: red !important;
       }
     </style>
     <!-- <link
@@ -28,29 +32,92 @@
     /> -->
   </head>
   <body>
-    <div>
-      <table id="example" class="table table-striped" style="width: 100%">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Extn.</th>
-            <th>Start date</th>
-            <th>Salary</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Extn.</th>
-            <th>Start date</th>
-            <th>Salary</th>
-          </tr>
-        </tfoot>
-      </table>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+                >Disabled</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="cardbox">
+        <table id="example" class="table table-striped" style="width: 100%">
+          <thead style="background-color: rgb(201, 192, 207)">
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Way Of Transaction</th>
+              <th>Amount</th>
+              <th>Comments</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th colspan="4" style="text-align: right">Total:</th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
     <script
       type="text/javascript"
@@ -68,7 +135,7 @@
 </html>
 <script>
   $.getJSON("expe_depot.json", function (json) {
-    console.log(json.sheets[0].lines);
+    // console.log(json.sheets[0].lines);
     var groupColumn = 0;
     var table = $("#example").DataTable({
       scrollY: "500px",
@@ -77,16 +144,15 @@
       data: json.sheets[0].lines,
       columns: [
         { data: "date" },
+        { data: "modeOfTransaction" },
+        { data: "wayOfTransaction" },
+        { data: "amount" },
         { data: "comments" },
-        { data: "comments" },
-        { data: "id" },
-        { data: "comments" },
-        { data: "id" },
       ],
       //ajax: "data/objects_deep.txt",
       columnDefs: [{ visible: false, targets: groupColumn }],
-      order: [[groupColumn, "asc"]],
-      displayLength: 25,
+      order: [[groupColumn, "desc"]],
+      displayLength: 10,
       drawCallback: function (settings) {
         var api = this.api();
         var rows = api.rows({ page: "current" }).nodes();
@@ -107,23 +173,6 @@
             }
           });
       },
-    });
-    $("#example tbody").on("click", "tr.group", function () {
-      var currentOrder = table.order()[0];
-      if (currentOrder[0] === groupColumn && currentOrder[1] === "asc") {
-        table.order([groupColumn, "desc"]).draw();
-      } else {
-        table.order([groupColumn, "asc"]).draw();
-      }
-    });
-    $("#example").DataTable({
-      createdRow: function (row, data, index) {
-        //if (data[5].replace(/[\$,]/g, "") * 1 > 150000) {
-        $("td", row).eq(5).addClass("highlight");
-        //}
-      },
-    });
-    $("#example").DataTable({
       footerCallback: function (row, data, start, end, display) {
         var api = this.api();
 
@@ -135,10 +184,9 @@
             ? i
             : 0;
         };
-
         // Total over all pages
         total = api
-          .column(4)
+          .column(3)
           .data()
           .reduce(function (a, b) {
             return intVal(a) + intVal(b);
@@ -146,142 +194,31 @@
 
         // Total over this page
         pageTotal = api
-          .column(4, { page: "current" })
+          .column(3, { page: "current" })
           .data()
           .reduce(function (a, b) {
             return intVal(a) + intVal(b);
           }, 0);
 
         // Update footer
-        $(api.column(4).footer()).html(
-          "$" + pageTotal + " ( $" + total + " total)"
+        $(api.column(3).footer()).html(
+          //"PageTotal $" + pageTotal +
+          "Total - $" + total
         );
       },
+      createdRow: function (row, data, index) {
+        if (data.amount <= 0) {
+          $("td", row).eq(2).addClass("low");
+        }
+      },
     });
+    // $("#example tbody").on("click", "tr.group", function () {
+    //   var currentOrder = table.order()[0];
+    //   if (currentOrder[0] === groupColumn && currentOrder[1] === "asc") {
+    //     table.order([groupColumn, "desc"]).draw();
+    //   } else {
+    //     table.order([groupColumn, "asc"]).draw();
+    //   }
+    // });
   });
 </script>
-
-<!-- <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dictionary</title>
-  </head>
-  <body>
-    <h1>Daily Expenses</h1>
-    <h6>17th May 2022</h6>
-    <table id="example" class="display" style="width: 100%">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Office</th>
-          <th>Extn.</th>
-          <th>Start date</th>
-          <th>Salary</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <th>Name</th>
-          <th>Position</th>
-          <th>Office</th>
-          <th>Extn.</th>
-          <th>Start date</th>
-          <th>Salary</th>
-        </tr>
-      </tfoot>
-    </table>
-  </body>
-</html>
-<script>
-  $.getJSON("expe_depot.json", function (json) {
-    console.log(json.sheets[0].lines);
-    $("#example").DataTable({
-      columns: [
-        { data: "json.sheets[0].lines.amount" },
-        { data: json.sheets[0].lines.amount },
-        { data: "date" },
-        { data: "comments" },
-        { data: "comments" },
-        { data: "id" },
-      ],
-    });
-  });
-  // $(document).ready(function () {
-  //   $("#example").DataTable({
-  //     processing: true,
-  //     ajax: "expe_depot.json",
-  //     columns: [
-  //       { data: "amount" },
-  //       { data: "amount" },
-  //       { data: "date" },
-  //       { data: "comments" },
-  //       { data: "comments" },
-  //       { data: "id" },
-  //     ],
-  //   });
-  // });
-  // var jsons = $.getJSON("data.json");
-  // var datas = jsons;
-  // var jso = [];
-  // var $table = $("#example");
-  // $.getJSON("data.json", function (json) {
-  //   //$table.bootstrapTable({ data: JSON.parse(datas.responseJSON.data) });
-  //   //console.log(datas.responseJSON.data);
-  //   //jso.push(json); // this will show the info it in firebug console
-  // });
-
-  // $.getJSON("expe_depot.json", function (json) {
-  //   //console.log(json.sheets[0].lines);
-  //   //$table.bootstrapTable({ data: json.sheets[0].lines });
-  // });
-
-  // //console.log(jso);
-  // var data = [
-  //   {
-  //     id: 0,
-  //     name: "Item 0",
-  //     price: "$0",
-  //   },
-  // ];
-  // var psons = $.getJSON("expe_depot.json");
-  // //console.log(psons.responseJSON);
-  // let requestt = new Request("./expe_depot.json");
-  // console.log(requestt);
-  // fetch(requestt)
-  //   .then(function (res) {
-  //     return res.json();
-  //   })
-  //   .then(function (data) {
-  //     console.log(data.sheets[0].lines);
-  //     //$("#example").bootstrapTable({ data: data.sheets[0].lines[0] });
-  //     $("#example").bootstrapTable({
-  //       ajax: "./expe_depot.json",
-  //       columns: [
-  //         { data: "sheets[0].lines[0].amount" },
-  //         { data: "hr.position" },
-  //         { data: "contact.0" },
-  //         { data: "contact.1" },
-  //         { data: "hr.start_date" },
-  //         { data: "hr.salary" },
-  //       ],
-  //     });
-  //   });
-
-  //var $table = $("#example");
-  //$table.bootstrapTable({ data: data });
-  //
-  // $(document).ready(function () {
-  //   $("#example").Boostrable({
-  //     ajax: "data.json",
-  //     columns: [
-  //       { data: "ClubTrackingNo" },
-  //       { data: "ClubModeOfPayment" },
-  //       { data: "ShippingAddress" },
-  //     ],
-  //   });
-  //   $table.bootstrapTable({ data: jsons });
-  // });
-</script> -->
